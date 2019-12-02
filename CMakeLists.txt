@@ -7,7 +7,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 option(COORDGEN_RIGOROUS_BUILD "Abort the build if the compiler issues \
        any warnings" OFF )
 option(COORDGEN_BUILD_TESTS "Whether test executables should be built" ON)
-option(COORDGEN_BUILD_EXAMPLE "Whether to build the sample executable" OFF)
+option(COORDGEN_BUILD_EXAMPLE "Whether to build the sample executable" ON)
 option(COORDGEN_BUILD_SHARED_LIBS "Build coordgen as a shared library \
        (turn off for a static one)" ON)
 
