@@ -4,7 +4,7 @@
 add_executable(test_coordgen test_coordgen.cpp)
 
 if(COORDGEN_BUILD_SHARED_LIBS)
-    target_compile_definitions(test_coordgen PRIVATE "BOOST_TEST_DYN_LINK")
+    target_compile_definitions(test_coordgen PRIVATE "BOOST_ALL_DYN_LINK")
 else(COORDGEN_BUILD_SHARED_LIBS)
     set(Boost_USE_STATIC_LIBS ON)
     target_compile_definitions(test_coordgen PRIVATE "STATIC_MAEPARSER")

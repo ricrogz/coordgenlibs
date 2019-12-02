@@ -22,6 +22,7 @@ if(MSVC)
     # (returning a vector of things)
     add_definitions(/wd4251 /wd4275 /wd4996 /D_SCL_SECURE_NO_WARNINGS
                     /D_CRT_SECURE_NO_WARNINGS)
+    add_definitions(-DBOOST_ALL_NO_LIB)
 endif(MSVC)
 
 if(COORDGEN_RIGOROUS_BUILD)
@@ -46,7 +47,6 @@ else(COORDGEN_BUILD_SHARED_LIBS)
     target_compile_definitions(coordgen PRIVATE "STATIC_MAEPARSER")
     target_compile_definitions(coordgen PRIVATE "STATIC_COORDGEN")
 endif(COORDGEN_BUILD_SHARED_LIBS)
-
 
 # Dependencies
 if(TARGET maeparser)
