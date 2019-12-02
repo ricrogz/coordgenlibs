@@ -12,7 +12,7 @@ option(COORDGEN_BUILD_EXAMPLE "Whether to build the sample executable" ON)
 # Use the maeparser_DIR variable to tell CMake where to search for the
 # maeparser library.
 
-set(MAEPARSER_VERSION "master" CACHE STRING "maeparser tag to build if \
+set(MAEPARSER_VERSION "allow_static_builds" CACHE STRING "maeparser tag to build if \
     a compiled library is not found")
 
 if(MSVC)

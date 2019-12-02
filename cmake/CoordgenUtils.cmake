@@ -18,7 +18,7 @@ macro(find_or_clone_maeparser)
         set(maeparser_DIR "${CMAKE_CURRENT_SOURCE_DIR}/maeparser-${MAEPARSER_VERSION}")
 
         if(NOT EXISTS "${maeparser_DIR}/maeparser/CMakeLists.txt")
-            file(DOWNLOAD "https://github.com/schrodinger/maeparser/archive/${MAEPARSER_VERSION}.tar.gz"
+            file(DOWNLOAD "https://github.com/ricrogz/maeparser/archive/${MAEPARSER_VERSION}.tar.gz"
                 "${maeparser_DIR}/maeparser-${MAEPARSER_VERSION}.tar.gz")
 
             execute_process(COMMAND ${CMAKE_COMMAND} -E tar zxf "maeparser-${MAEPARSER_VERSION}.tar.gz"
