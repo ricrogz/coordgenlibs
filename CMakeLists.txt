@@ -59,6 +59,9 @@ else()
 endif()
 include_directories(${maeparser_INCLUDE_DIRS})
 
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+
 target_link_libraries(coordgen ${maeparser_LIBRARIES})
 
 set_target_properties(coordgen

@@ -8,6 +8,8 @@ else(COORDGEN_BUILD_SHARED_LIBS)
     target_compile_definitions(example PRIVATE "STATIC_COORDGEN")
 endif(COORDGEN_BUILD_SHARED_LIBS)
 
-find_package(Boost COMPONENTS iostreams REQUIRED)
+# Workaround for CI: Boost regex seems to be missing icu symbols in
+# some conda builds. The filesystem lib seems to have them.
+find_package(Boost COMPONENTS filesystem REQUIRED)
 
-target_link_libraries(example coordgen Boost::iostreams)
+target_link_libraries(example coordgen Boost::filesystem)
