@@ -4,10 +4,12 @@
  */
 
 #include "sketcherMinimizerFragment.h"
+
 #include "sketcherMinimizerAtom.h"
 #include "sketcherMinimizerBond.h"
 #include "sketcherMinimizerMaths.h"
 #include "sketcherMinimizerRing.h"
+#include <cmath>
 
 static const float INVERTED_MACROCYCLE_BOND_PENALTY = 100.f;
 static const float SCALE_FRAGMENT_PENALTY = 500.f;
@@ -278,7 +280,7 @@ CoordgenInvertBondDOF::CoordgenInvertBondDOF(sketcherMinimizerAtom* pivotAtom,
     : CoordgenFragmentDOF(pivotAtom->getFragment()), m_pivotAtom(pivotAtom),
       m_boundAtom(boundAtom)
 {
-    assert(pivotAtom->bondTo(boundAtom) != NULL);
+    assert(pivotAtom->bondTo(boundAtom) != nullptr);
     addAtom(boundAtom);
 }
 
@@ -359,10 +361,7 @@ float CoordgenFlipRingDOF::getCurrentPenalty() const
 }
 
 sketcherMinimizerFragment::sketcherMinimizerFragment()
-    : fixed(false), isTemplated(false), constrained(false), isChain(false),
-      _bondToParent(nullptr), longestChainFromHere(0.f),
-      numberOfChildrenAtoms(0), numberOfChildrenAtomsRank(0.f),
-      m_parent(nullptr)
+
 {
     m_dofs.push_back(new CoordgenFlipFragmentDOF(this));
     //    m_dofs.push_back(new CoordgenScaleFragmentDOF(this));
@@ -475,16 +474,17 @@ void sketcherMinimizerFragment::storeCoordinateInformation()
     float angle = 0.f;
     if (_bondToParent) {
         origin = _bondToParent->endAtom->getCoordinates();
-        angle = atan2(_bondToParent->startAtom->coordinates.y() - origin.y(),
-                      -_bondToParent->startAtom->coordinates.x() + origin.x());
+        angle =
+            std::atan2(_bondToParent->startAtom->coordinates.y() - origin.y(),
+                       -_bondToParent->startAtom->coordinates.x() + origin.x());
     } else {
         if (!constrained && !fixed) {
             origin = m_atoms[0]->getCoordinates();
         }
     }
 
-    float cosine = cos(-angle);
-    float sine = sin(-angle);
+    float cosine = std::cos(-angle);
+    float sine = std::sin(-angle);
 
     for (auto at : m_atoms) {
         sketcherMinimizerPointF c = at->coordinates - origin;
@@ -503,8 +503,8 @@ void sketcherMinimizerFragment::storeCoordinateInformation()
 void sketcherMinimizerFragment::setCoordinates(
     const sketcherMinimizerPointF& position, float angle)
 {
-    float sine = sin(angle);
-    float cosine = cos(angle);
+    float sine = std::sin(angle);
+    float cosine = std::cos(angle);
     assert(_coordinates.size() == m_atoms.size() + _children.size());
     for (auto& atom : _coordinates) {
         atom.first->setCoordinates(atom.second);

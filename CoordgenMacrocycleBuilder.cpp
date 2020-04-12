@@ -462,7 +462,7 @@ int Polyomino::getIndexInList(hexCoords coords) const
 void Polyomino::addHex(hexCoords coords)
 {
     int index = getIndexInList(coords);
-    assert(m_grid[index] == NULL);
+    assert(m_grid[index] == nullptr);
     Hex* h = new Hex(coords);
     m_list.push_back(h);
     m_grid[index] = h;
@@ -472,7 +472,7 @@ void Polyomino::removeHex(hexCoords coords)
 {
     int index = getIndexInList(coords);
     Hex* hex = m_grid[getIndexInList(coords)];
-    assert(hex != NULL);
+    assert(hex != nullptr);
     for (unsigned int i = 0; i < m_list.size(); i++) {
         if (m_list[i] == hex) {
             m_list.erase(m_list.begin() + i);
@@ -648,8 +648,8 @@ vector<sketcherMinimizerPointF> CoordgenMacrocycleBuilder::newMacrocycle(
     vector<Polyomino> pols;
     pols.push_back(p);
     vector<Polyomino> squarePols = buildSquaredShapes(natoms);
-    for (unsigned int i = 0; i < squarePols.size(); i++) {
-        assert(squarePols[i].getPath().size() == atoms.size());
+    for (auto& squarePol : squarePols) {
+        assert(squarePol.getPath().size() == atoms.size());
     }
     pols.reserve(pols.size() + squarePols.size());
     pols.insert(pols.end(), squarePols.begin(), squarePols.end());

@@ -3,9 +3,9 @@
 ///
 // Shim for creating sketcherMolecules from .mae files.
 
-#include "sketcherMinimizerMolecule.h"
 #include "maeparser/MaeConstants.hpp"
 #include "maeparser/Reader.hpp"
+#include "sketcherMinimizerMolecule.h"
 
 using namespace std;
 using namespace schrodinger;

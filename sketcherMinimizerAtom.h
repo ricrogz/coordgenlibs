@@ -83,22 +83,24 @@ class EXPORT_COORDGEN sketcherMinimizerAtom
     sketcherMinimizerAtom();
     virtual ~sketcherMinimizerAtom();
 
-    bool crossLayout; // atoms with 4 substituents displayed in a cross style
-                      // (such as S in sulphate)
-    bool fixed, constrained, rigid;
-    bool isSharedAndInner; // shared by two rings and needs to be drawn inside a
-                           // ring
+    bool crossLayout{false}; // atoms with 4 substituents displayed in a cross
+                             // style (such as S in sulphate)
+    bool fixed{false}, constrained{false}, rigid{false};
+    bool isSharedAndInner{false}; // shared by two rings and needs to be drawn
+                                  // inside a ring
     bool hidden;
-    int atomicNumber, charge, _valence, _generalUseN, _generalUseN2;
-    int m_chmN; // idx of the corresponding ChmAtom if molecule comes from 3d
+    int atomicNumber{6}, charge{0}, _valence{-10}, _generalUseN{-1},
+        _generalUseN2{-1};
+    int m_chmN{
+        -1}; // idx of the corresponding ChmAtom if molecule comes from 3d
 
-    bool _generalUseVisited, _generalUseVisited2;
+    bool _generalUseVisited{false}, _generalUseVisited2{false};
     bool m_clockwiseInvert;
     bool m_ignoreRingChirality;
     std::vector<int> m_RSPriorities;
     int _implicitHs = -1;
     sketcherMinimizerMolecule* molecule;
-    sketcherMinimizerFragment* fragment;
+    sketcherMinimizerFragment* fragment{nullptr};
     void setFragment(sketcherMinimizerFragment* fragmentToSet)
     {
         fragment = fragmentToSet;
@@ -136,16 +138,16 @@ class EXPORT_COORDGEN sketcherMinimizerAtom
     bool m_isClashing, m_isWaterMap;
     float m_pocketDistance;
 
-    bool needsCheckForClashes;
+    bool needsCheckForClashes{false};
     bool m_isLigand;
-    bool visited, coordinatesSet;
-    bool isR; // stereochemistry
-    bool hasStereochemistrySet, m_isStereogenic;
-    bool _hasRingChirality; // used to keep track of cyclohexane cis/trans
-                            // chirality
+    bool visited{false}, coordinatesSet{false};
+    bool isR{true}; // stereochemistry
+    bool hasStereochemistrySet{false}, m_isStereogenic;
+    bool _hasRingChirality{false}; // used to keep track of cyclohexane
+                                   // cis/trans chirality
 
     /* write coordinates to atom */
-    void setCoordinates(sketcherMinimizerPointF coords);
+    void setCoordinates(const sketcherMinimizerPointF& coords);
 
     /* check that the atom has no double bonds possibly involved in E/Z
      * stereochemistry */

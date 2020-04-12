@@ -258,12 +258,12 @@ class sketcherMinimizerFragment
     std::map<sketcherMinimizerAtom*, sketcherMinimizerPointF> _coordinates;
     sketcherMinimizerPointF _bondToParentCoordinatesStart;
     sketcherMinimizerPointF _bondToParentCoordinatesEnd;
-    bool fixed, isTemplated, constrained;
-    bool isChain;
-    sketcherMinimizerBond* _bondToParent;
-    float longestChainFromHere;
-    size_t numberOfChildrenAtoms;
-    float numberOfChildrenAtomsRank;
+    bool fixed{false}, isTemplated{false}, constrained{false};
+    bool isChain{false};
+    sketcherMinimizerBond* _bondToParent{nullptr};
+    float longestChainFromHere{0.f};
+    size_t numberOfChildrenAtoms{0};
+    float numberOfChildrenAtomsRank{0.f};
 
     /* translate and rotate the fragment and set the resulting coordinates to
      * every atom */
@@ -273,7 +273,7 @@ class sketcherMinimizerFragment
     CoordgenFragmentDOF* getFlipDof() const { return m_dofs[0]; }
 
   private:
-    sketcherMinimizerFragment* m_parent;
+    sketcherMinimizerFragment* m_parent{nullptr};
     std::vector<sketcherMinimizerAtom*> m_atoms;
     std::vector<sketcherMinimizerBond*> m_bonds;
     std::vector<sketcherMinimizerRing*> m_rings;

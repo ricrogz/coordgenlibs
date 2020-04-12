@@ -68,11 +68,11 @@ class EXPORT_COORDGEN sketcherMinimizerMolecule
     }
     sketcherMinimizerFragment* getMainFragment() { return m_mainFragment; }
 
-    bool fixed;
-    bool hasFixedFragments, hasConstrainedFragments;
-    bool needToAlignNonRingAtoms;
-    bool needToAlignWholeMolecule;
-    bool isPlaced; // used by arrangeMultipleMolecules
+    bool fixed{false};
+    bool hasFixedFragments{false}, hasConstrainedFragments{false};
+    bool needToAlignNonRingAtoms{false};
+    bool needToAlignWholeMolecule{false};
+    bool isPlaced{false}; // used by arrangeMultipleMolecules
 
     /* return the total charge of the molecule */
     int totalCharge();
@@ -107,8 +107,8 @@ class EXPORT_COORDGEN sketcherMinimizerMolecule
                         std::vector<sketcherMinimizerRing*>& rings);
 
   private:
-    sketcherMinimizerFragment* m_mainFragment;
-    bool m_requireMinimization;
+    sketcherMinimizerFragment* m_mainFragment{nullptr};
+    bool m_requireMinimization{false};
 };
 
 #endif // sketcherMINIMIZERMOLECULE_H

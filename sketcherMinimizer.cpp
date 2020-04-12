@@ -235,7 +235,7 @@ void sketcherMinimizer::initialize(
             _atoms.push_back(a);
         }
         if (a->isResidue()) {
-            _residues.push_back(static_cast<sketcherMinimizerResidue*>(a));
+            _residues.push_back(dynamic_cast<sketcherMinimizerResidue*>(a));
         }
     }
 
@@ -245,7 +245,7 @@ void sketcherMinimizer::initialize(
         }
         if (b->isResidueInteraction()) {
             _residueInteractions.push_back(
-                static_cast<sketcherMinimizerResidueInteraction*>(b));
+                dynamic_cast<sketcherMinimizerResidueInteraction*>(b));
         }
     }
 
@@ -1071,9 +1071,9 @@ sketcherMinimizer::computeChainsStartingPositionsMetaMol(
             for (auto interaction : residue->residueInteractions) {
                 if (interaction->startAtom->isResidue() &&
                     interaction->endAtom->isResidue()) {
-                    auto* r1 = static_cast<sketcherMinimizerResidue*>(
+                    auto* r1 = dynamic_cast<sketcherMinimizerResidue*>(
                         interaction->startAtom);
-                    auto* r2 = static_cast<sketcherMinimizerResidue*>(
+                    auto* r2 = dynamic_cast<sketcherMinimizerResidue*>(
                         interaction->endAtom);
                     if (r1->chain != r2->chain) {
                         // add a bond to the metaMol if it doesn't exist already
@@ -1164,7 +1164,7 @@ std::vector<sketcherMinimizerResidue*> sketcherMinimizer::orderResiduesOfChains(
             residueQueue.pop();
             for (auto partner : topResidue->residueInteractionPartners) {
                 auto* partnerRes =
-                    static_cast<sketcherMinimizerResidue*>(partner);
+                    dynamic_cast<sketcherMinimizerResidue*>(partner);
                 if (visitedResidues.find(partnerRes) == visitedResidues.end()) {
                     residueQueue.push(partnerRes);
                     visitedResidues.insert(partnerRes);
@@ -1195,7 +1195,7 @@ void sketcherMinimizer::placeResiduesProteinOnlyModeLIDStyle(
             if (partner->coordinatesSet) {
                 ++partnersAlreadySet;
                 auto partnerResidue =
-                    static_cast<sketcherMinimizerResidue*>(partner);
+                    dynamic_cast<sketcherMinimizerResidue*>(partner);
                 if (!firstPartner && partnerResidue->chain != res->chain) {
                     firstPartner = partnerResidue;
                 }
@@ -2358,7 +2358,7 @@ void sketcherMinimizer::placeMolResidueLigandStyle(
         n++;
         sketcherMinimizerPointF paddV = parentAt->getSingleAdditionVector();
         if (b->isResidueInteraction()) {
-            auto* ri = static_cast<sketcherMinimizerResidueInteraction*>(b);
+            auto* ri = dynamic_cast<sketcherMinimizerResidueInteraction*>(b);
             if (ri->startAtom->molecule == parent &&
                 ri->m_otherStartAtoms.size()) {
                 paddV = sketcherMinimizerAtom::getSingleAdditionVector(
@@ -3063,7 +3063,7 @@ void sketcherMinimizer::findClosestAtomToResidues(
                 }
             }
         }
-        static_cast<sketcherMinimizerResidue*>(r)->m_closestLigandAtom =
+        dynamic_cast<sketcherMinimizerResidue*>(r)->m_closestLigandAtom =
             closestA;
         if (!r->m_isClashing) {
             r->m_isClashing = (squareD < RESIDUE_CLASH_DISTANCE_SQUARED);
@@ -3071,11 +3071,11 @@ void sketcherMinimizer::findClosestAtomToResidues(
     }
     foreach (sketcherMinimizerBond* b, _bonds) {
         if (b->startAtom->isResidue()) {
-            static_cast<sketcherMinimizerResidue*>(b->startAtom)
+            dynamic_cast<sketcherMinimizerResidue*>(b->startAtom)
                 ->m_closestLigandAtom = b->endAtom;
         }
         if (b->endAtom->isResidue()) {
-            static_cast<sketcherMinimizerResidue*>(b->endAtom)
+            dynamic_cast<sketcherMinimizerResidue*>(b->endAtom)
                 ->m_closestLigandAtom = b->startAtom;
         }
     }

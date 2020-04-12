@@ -9,6 +9,8 @@
 #ifndef sketcherMINIMIZERINTERACTION
 #define sketcherMINIMIZERINTERACTION
 
+#include <cmath>
+
 #include "sketcherMinimizerAtom.h"
 
 /* abstract class for force field interactions */
@@ -30,7 +32,7 @@ class sketcherMinimizerInteraction
     virtual void energy(float& e)
     {
         sketcherMinimizerPointF l = atom1->coordinates - atom2->coordinates;
-        float dr = sqrt(l.x() * l.x() + l.y() * l.y()) - restV;
+        float dr = std::sqrt(l.x() * l.x() + l.y() * l.y()) - restV;
         e += 0.5f * k * dr * dr;
     };
 

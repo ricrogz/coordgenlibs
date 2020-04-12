@@ -14,7 +14,7 @@
 using namespace std;
 
 sketcherMinimizerRing::sketcherMinimizerRing()
-    : visited(false), coordinatesGenerated(false)
+
 {
 
     //    assert (0);

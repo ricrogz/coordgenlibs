@@ -9,6 +9,8 @@
 #ifndef sketcherMINIMIZERBENDMINIMIZERINTERACTION
 #define sketcherMINIMIZERBENDMINIMIZERINTERACTION
 
+#include <cmath>
+
 #include "sketcherMinimizerInteraction.h"
 
 #ifndef M_PI
@@ -105,12 +107,12 @@ class sketcherMinimizerBendInteraction : public sketcherMinimizerInteraction
             n2 *= -1; // dot product n2 v3
         }
 
-        float q1 = sqrt(n1.x() * n1.x() + n1.y() * n1.y());
+        float q1 = std::sqrt(n1.x() * n1.x() + n1.y() * n1.y());
         if (q1 < SKETCHER_EPSILON) {
             q1 = SKETCHER_EPSILON;
         }
 
-        float q2 = sqrt(n2.x() * n2.x() + n2.y() * n2.y());
+        float q2 = std::sqrt(n2.x() * n2.x() + n2.y() * n2.y());
         if (q2 < SKETCHER_EPSILON) {
             q2 = SKETCHER_EPSILON;
         }
@@ -139,7 +141,8 @@ class sketcherMinimizerBendInteraction : public sketcherMinimizerInteraction
         float v2x = x3 - x2;
         float v2y = y3 - y2;
 
-        float d = sqrt(v1x * v1x + v1y * v1y) * sqrt(v2x * v2x + v2y * v2y);
+        float d =
+            std::sqrt(v1x * v1x + v1y * v1y) * std::sqrt(v2x * v2x + v2y * v2y);
         if (d < SKETCHER_EPSILON) {
             d = SKETCHER_EPSILON;
         }
@@ -150,7 +153,7 @@ class sketcherMinimizerBendInteraction : public sketcherMinimizerInteraction
         } else if (cosine > 1) {
             cosine = 1;
         }
-        return float((acos(cosine)) * 180 / M_PI);
+        return float((std::acos(cosine)) * 180 / M_PI);
     }
     sketcherMinimizerAtom* atom3;
     float k2;

@@ -8,19 +8,15 @@
 
 #include "sketcherMinimizerMolecule.h"
 #include "sketcherMinimizerAtom.h"
+#include "sketcherMinimizerBond.h"
 #include "sketcherMinimizerMaths.h"
 #include "sketcherMinimizerRing.h"
-#include "sketcherMinimizerBond.h"
 #include <queue>
 
 using namespace std;
 
-sketcherMinimizerMolecule::sketcherMinimizerMolecule()
-    : fixed(false),
-
-      hasFixedFragments(false), hasConstrainedFragments(false),
-      needToAlignNonRingAtoms(false), needToAlignWholeMolecule(false),
-      isPlaced(false), m_mainFragment(nullptr), m_requireMinimization(false){};
+sketcherMinimizerMolecule::sketcherMinimizerMolecule() = default;
+;
 
 sketcherMinimizerMolecule::~sketcherMinimizerMolecule()
 {

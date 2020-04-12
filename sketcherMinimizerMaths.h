@@ -13,7 +13,6 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
-#include <cmath>
 #include <vector>
 
 #define MACROCYCLE 9 // smallest MACROCYCLE
@@ -82,7 +81,7 @@ class sketcherMinimizerPointF
     {
         float dd = squareLength();
         if (dd > SKETCHER_EPSILON) {
-            return sqrt(dd);
+            return std::sqrt(dd);
         } else {
             return 0;
         }
@@ -306,8 +305,8 @@ struct sketcherMinimizerMaths {
     {
         sketcherMinimizerPointF v1 = p1 - p2;
         sketcherMinimizerPointF v2 = p3 - p2;
-        return float(atan2(v1.x() * v2.y() - v1.y() * v2.x(),
-                           v1.x() * v2.x() + v1.y() * v2.y()) *
+        return float(std::atan2(v1.x() * v2.y() - v1.y() * v2.x(),
+                                v1.x() * v2.x() + v1.y() * v2.y()) *
                      180 / M_PI);
     }
 
@@ -327,7 +326,8 @@ struct sketcherMinimizerMaths {
         float v2x = x3 - x2;
         float v2y = y3 - y2;
 
-        float d = sqrt(v1x * v1x + v1y * v1y) * sqrt(v2x * v2x + v2y * v2y);
+        float d =
+            std::sqrt(v1x * v1x + v1y * v1y) * std::sqrt(v2x * v2x + v2y * v2y);
         if (d < SKETCHER_EPSILON) {
             d = SKETCHER_EPSILON;
         }
@@ -338,7 +338,7 @@ struct sketcherMinimizerMaths {
         } else if (cosine > 1) {
             cosine = 1;
         }
-        return float((acos(cosine)) * 180 / M_PI);
+        return float((std::acos(cosine)) * 180 / M_PI);
     }
 
     /* return true if the two points are very close in space */
@@ -360,7 +360,7 @@ struct sketcherMinimizerMaths {
         //    ///cerr << "("<<p1.x()<<","<<p1.y()<<") ("<<p2.x
         //    ()<<","<<p2.y()<<")  ("<<lineP1.x()<<","<<lineP1.y()<<")
         //    ("<<lineP2.x ()<<","<<lineP2.y()<<")"<<endl;
-        if (fabs(float(x)) > fabs((y))) { // what about q?
+        if (std::fabs(float(x)) > std::fabs((y))) { // what about q?
             float m = y / x;
 
             float d1 = p1.y() - lineP1.y() - m * (p1.x() - lineP1.x());
@@ -641,7 +641,7 @@ struct sketcherMinimizerMaths {
             return 0;
         }
 
-        float d = sqrt(d2);
+        float d = std::sqrt(d2);
         if (d > SKETCHER_EPSILON) {
             targetdX /= d;
             targetdY /= d;
@@ -652,12 +652,12 @@ struct sketcherMinimizerMaths {
         if (cos < 0) {
             return cutOff;
         }
-        float sin = sqrt(1 - (cos * cos));
+        float sin = std::sqrt(1 - (cos * cos));
         float f = d * sin;
         if (f > rR) {
             return cutOff;
         }
-        float result = sqrt(d2 - (f * f)) - sqrt((rR * rR) - (f * f));
+        float result = std::sqrt(d2 - (f * f)) - std::sqrt((rR * rR) - (f * f));
         if (result > cutOff) {
             return cutOff;
         }
@@ -669,7 +669,7 @@ struct sketcherMinimizerMaths {
     {
         float m = x * x + y * y + z * z;
         if (m > SKETCHER_EPSILON) {
-            m = sqrt(m);
+            m = std::sqrt(m);
         }
         return m;
     }
@@ -709,7 +709,7 @@ struct sketcherMinimizerMaths {
         float l1 = length3D(xa, ya, za);
         float l2 = length3D(xb, yb, zb);
         float dp = dotProduct3D(xa, ya, za, xb, yb, zb);
-        return static_cast<float>(acos(dp / (l1 * l2)) * 180.f / M_PI);
+        return static_cast<float>(std::acos(dp / (l1 * l2)) * 180.f / M_PI);
     }
 
     /* dihedral angle defined by 4 3d points */

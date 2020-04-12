@@ -1,7 +1,6 @@
 
 #pragma once
 
-
 ///
 // Find the templates for coordinate generation
 //
@@ -12,15 +11,15 @@
 // generated using templates.mae version c17d2be57897d3e83435.
 //
 
-
 #include <vector>
 
 class sketcherMinimizerMolecule;
-namespace schrodinger {
+namespace schrodinger
+{
 
 ///
 // Create a new vector of sketcherMinimizerMolecule*. Caller
 // owns the sketcherMinimizerMolecule objects.
 std::vector<sketcherMinimizerMolecule*> coordgen_templates();
 
-}
+} // namespace schrodinger

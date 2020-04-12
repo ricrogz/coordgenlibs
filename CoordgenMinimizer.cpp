@@ -1049,7 +1049,7 @@ std::vector<std::vector<CoordgenFragmentDOF*>>
 CoordgenMinimizer::buildTuplesOfDofs(const vector<CoordgenFragmentDOF*>& dofs,
                                      unsigned int order) const
 {
-    std::vector<std::vector<CoordgenFragmentDOF *>> growingVector,
+    std::vector<std::vector<CoordgenFragmentDOF*>> growingVector,
         lastOrderVector;
     for (auto dof : dofs) {
         std::vector<CoordgenFragmentDOF*> tuple;
@@ -1189,7 +1189,7 @@ bool CoordgenMinimizer::flipFragments(sketcherMinimizerMolecule* molecule,
     if (bestResult < clashEnergyThreshold) {
         return true;
     }
-    vector<CoordgenFragmentDOF *> dofs, onlyFlipDofs;
+    vector<CoordgenFragmentDOF*> dofs, onlyFlipDofs;
     vector<sketcherMinimizerFragment*> fragments = molecule->getFragments();
     reverse(fragments.begin(), fragments.end());
     for (auto fragment : fragments) {
@@ -1604,7 +1604,7 @@ CoordgenDOFSolutions::findBestSolution() const
 {
     std::pair<std::vector<short unsigned int>, float> bestSolution =
         *m_solutions.begin();
-    for (auto solution : m_solutions) {
+    for (const auto& solution : m_solutions) {
         if (solution.second < bestSolution.second) {
             bestSolution = solution;
         }
